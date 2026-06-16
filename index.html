@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Waste – No.1 Waste Management Portal</title>
+  <meta name="description" content="Find 1,474+ verified waste management services on Stackly. Connect with top recycling, collection, treatment & disposal companies." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="assets/images/logo.webp" alt="Stackly Logo" class="loader-logo-img" />
+      </div>
+      <p class="loader-tagline">Connecting You to Smarter Waste Solutions on Stackly...</p>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+  </div>
+
+  <!-- MAIN SITE -->
+  <div id="main-site" style="display:none;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/images/logo.webp" alt="Stackly" class="nav-logo-img" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jobs.html">Find Services</a></li>
+          <li><a href="companies.html">Companies</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Solutions</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="signin.html" class="btn-outline">Sign In</a>
+          <a href="post-job.html" class="btn-primary">List Your Service</a>
+        </div>
+        <button class="hamburger" onclick="openMenu()">
+          <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <a href="index.html" class="mob-logo">
+          <img src="assets/images/logo.webp" alt="Stackly" />
+        </a>
+        <button class="mobile-menu-close" onclick="closeMenu()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <ul>
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="jobs.html"><i class="fa-solid fa-magnifying-glass"></i> Find Services</a></li>
+        <li><a href="companies.html"><i class="fa-solid fa-building"></i> Companies</a></li>
+        <li><a href="categories.html"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+        <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+        <li><a href="services.html"><i class="fa-solid fa-recycle"></i> Solutions</a></li>
+        <li><a href="blog.html"><i class="fa-solid fa-newspaper"></i> Blog</a></li>
+        <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        <li><a href="#how-it-works"><i class="fa-solid fa-circle-info"></i> How It Works</a></li>
+        <li><a href="#testimonials"><i class="fa-solid fa-star"></i> Reviews</a></li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <a href="signin.html" class="mob-signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+        <a href="register.html" class="mob-signup"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+        <a href="post-job.html" class="mob-post"><i class="fa-solid fa-plus"></i> List Your Service</a>
+        <button class="mob-logout" onclick="localStorage.removeItem('stackly_user_name'); window.location.href='index.html';"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge"><i class="fa-solid fa-recycle"></i> 1,474+ Verified Waste Management Services on Stackly</div>
+          <h1 class="hero-title">Smarter <span class="accent">Waste</span> Management Starts Here</h1>
+          <p class="hero-subtitle">Discover certified waste collectors, recyclers, treatment plants & hazardous disposal experts across India. One platform. Every waste type. Fully compliant.</p>
+
+          <!-- Search Bar -->
+          <div class="search-box">
+            <div class="search-field">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Service type, keyword, or company" />
+            </div>
+            <div class="search-divider"></div>
+            <div class="search-field">
+              <i class="fa-solid fa-location-dot"></i>
+              <input type="text" placeholder="Coimbatore, Erode, Tirupur..." />
+            </div>
+            <button class="search-btn" onclick="window.location.href='jobs.html'">Search Services</button>
+          </div>
+
+          <div class="hero-tags">
+            <span>Popular:</span>
+            <a href="jobs.html">E-Waste Recycling</a>
+            <a href="jobs.html">Municipal Solid Waste</a>
+            <a href="jobs.html">Biomedical Waste</a>
+            <a href="jobs.html">Industrial Waste</a>
+            <a href="jobs.html">Hazardous Disposal</a>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-number">1,474+</div>
+            <div class="stat-label">Active Services</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">800+</div>
+            <div class="stat-label">Partner Companies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Tonnes Processed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories" id="categories">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Explore by Type</div>
+          <h2>Browse <span class="accent">Waste Categories</span></h2>
+          <p>Top waste management sectors served across India</p>
+        </div>
+        <div class="categories-grid">
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h3>E-Waste</h3>
+            <p>320 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-industry"></i></div>
+            <h3>Industrial Waste</h3>
+            <p>218 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-trash-can"></i></div>
+            <h3>Municipal Solid Waste</h3>
+            <p>185 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-syringe"></i></div>
+            <h3>Biomedical Waste</h3>
+            <p>142 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-flask"></i></div>
+            <h3>Chemical / Hazardous</h3>
+            <p>198 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Organic / Compost</h3>
+            <p>96 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-bottle-water"></i></div>
+            <h3>Plastic Recycling</h3>
+            <p>110 services</p>
+          </a>
+          <a href="jobs.html" class="category-card" style="text-decoration:none;display:block;">
+            <div class="cat-icon"><i class="fa-solid fa-droplet"></i></div>
+            <h3>Wastewater Treatment</h3>
+            <p>134 services</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED SERVICES -->
+    <section class="jobs" id="jobs">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Top Listings</div>
+          <h2>Featured <span class="accent">Services on Stackly</span></h2>
+          <p>Hand-picked waste management solutions from verified providers</p>
+        </div>
+        <div class="jobs-grid">
+
+          <div class="job-card featured">
+            <div class="job-top">
+              <div class="company-logo google"><i class="fa-solid fa-mobile-screen"></i></div>
+              <span class="job-badge">Verified</span>
+            </div>
+            <h3 class="job-title">E-Waste Collection & Recycling</h3>
+            <p class="job-company">EcoCircuit India – Coimbatore</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> Peelamedu, Coimbatore</span>
+              <span><i class="fa-solid fa-clock"></i> Scheduled Pickup</span>
+            </div>
+            <div class="job-salary">₹2/kg – ₹15/kg (buy-back rates)</div>
+            <div class="job-tags"><span>Computers</span><span>Phones</span><span>Batteries</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+          <div class="job-card">
+            <div class="job-top">
+              <div class="company-logo meta"><i class="fa-solid fa-trash-can"></i></div>
+              <span class="job-badge new">New</span>
+            </div>
+            <h3 class="job-title">Municipal Solid Waste Management</h3>
+            <p class="job-company">GreenCity Solutions – Coimbatore</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> RS Puram, Coimbatore</span>
+              <span><i class="fa-solid fa-clock"></i> Daily Collection</span>
+            </div>
+            <div class="job-salary">₹500 – ₹2,000/month (bulk contracts)</div>
+            <div class="job-tags"><span>Residential</span><span>Commercial</span><span>Segregation</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+          <div class="job-card">
+            <div class="job-top">
+              <div class="company-logo amazon"><i class="fa-solid fa-flask"></i></div>
+              <span class="job-badge">Top Rated</span>
+            </div>
+            <h3 class="job-title">Industrial Hazardous Waste Disposal</h3>
+            <p class="job-company">SafeDispose Pvt Ltd – Coimbatore</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> SIPCOT, Coimbatore</span>
+              <span><i class="fa-solid fa-clock"></i> On-demand</span>
+            </div>
+            <div class="job-salary">Custom pricing (volume-based)</div>
+            <div class="job-tags"><span>Chemicals</span><span>Solvents</span><span>Certified</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+          <div class="job-card">
+            <div class="job-top">
+              <div class="company-logo microsoft"><i class="fa-solid fa-droplet"></i></div>
+              <span class="job-badge new">New</span>
+            </div>
+            <h3 class="job-title">Wastewater Treatment Plant Operation</h3>
+            <p class="job-company">AquaPure Systems – Coimbatore</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> Avinashi Road, Coimbatore</span>
+              <span><i class="fa-solid fa-clock"></i> 24/7 Operation</span>
+            </div>
+            <div class="job-salary">₹50,000 – ₹5,00,000/month</div>
+            <div class="job-tags"><span>Effluent</span><span>STP</span><span>ETP</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+          <div class="job-card">
+            <div class="job-top">
+              <div class="company-logo apple"><i class="fa-solid fa-syringe"></i></div>
+              <span class="job-badge">Featured</span>
+            </div>
+            <h3 class="job-title">Biomedical Waste Collection & Treatment</h3>
+            <p class="job-company">MediWaste India – Coimbatore</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> Avanashi Road, Coimbatore</span>
+              <span><i class="fa-solid fa-clock"></i> Daily Pickup</span>
+            </div>
+            <div class="job-salary">₹3,000 – ₹15,000/month</div>
+            <div class="job-tags"><span>Hospitals</span><span>Clinics</span><span>CPCB Certified</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+          <div class="job-card">
+            <div class="job-top">
+              <div class="company-logo netflix"><i class="fa-solid fa-bottle-water"></i></div>
+              <span class="job-badge new">New</span>
+            </div>
+            <h3 class="job-title">Plastic Waste Recycling & Granulation</h3>
+            <p class="job-company">PlasticCycle Works – Tirupur</p>
+            <div class="job-meta">
+              <span><i class="fa-solid fa-location-dot"></i> Tirupur (Near Coimbatore)</span>
+              <span><i class="fa-solid fa-clock"></i> Bulk Pickup</span>
+            </div>
+            <div class="job-salary">₹8/kg – ₹25/kg (material type)</div>
+            <div class="job-tags"><span>PET</span><span>HDPE</span><span>PP</span></div>
+            <a href="apply.html" class="btn-apply">Request Service</a>
+          </div>
+
+        </div>
+        <div class="view-all-wrap">
+          <a href="jobs.html" class="btn-outline-lg">View All 1,474+ Services on Stackly <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Simple Process</div>
+          <h2>How <span class="accent">Stackly</span> Works</h2>
+          <p>Connect with the right waste management partner in three easy steps</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <div class="step-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <h3>Register Your Account</h3>
+            <p>Sign up for free and describe your waste management needs — whether you're a household, business, hospital, or factory.</p>
+          </div>
+          <div class="step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>Discover Local Services</h3>
+            <p>Browse 1,474+ verified waste management services in your area. Filter by waste type, frequency, and budget.</p>
+          </div>
+          <div class="step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <div class="step-icon"><i class="fa-solid fa-paper-plane"></i></div>
+            <h3>Connect & Go Green</h3>
+            <p>Submit a service request instantly. Track your bookings, get confirmations, and enjoy a cleaner, compliant operation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP COMPANIES -->
+    <section class="companies" id="companies">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Top Providers</div>
+          <h2>Companies <span class="accent">Listed on Stackly</span></h2>
+          <p>Join thousands of clients who trust these certified waste management companies</p>
+        </div>
+        <div class="companies-grid">
+          <div class="company-card">
+            <div class="co-logo google"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h4>EcoCircuit India</h4>
+            <p>42 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+          <div class="company-card">
+            <div class="co-logo meta"><i class="fa-solid fa-industry"></i></div>
+            <h4>SafeDispose Pvt Ltd</h4>
+            <p>28 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+          <div class="company-card">
+            <div class="co-logo amazon"><i class="fa-solid fa-droplet"></i></div>
+            <h4>AquaPure Systems</h4>
+            <p>65 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+          <div class="company-card">
+            <div class="co-logo microsoft"><i class="fa-solid fa-syringe"></i></div>
+            <h4>MediWaste India</h4>
+            <p>37 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+          <div class="company-card">
+            <div class="co-logo apple"><i class="fa-solid fa-trash-can"></i></div>
+            <h4>GreenCity Solutions</h4>
+            <p>54 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+          <div class="company-card">
+            <div class="co-logo slack"><i class="fa-solid fa-bottle-water"></i></div>
+            <h4>PlasticCycle Works</h4>
+            <p>23 active services</p>
+            <a href="jobs.html">View Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Success Stories</div>
+          <h2>What Our <span class="accent">Clients Say</span></h2>
+          <p>Real people, real results</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"We found a certified e-waste recycler through Stackly within 2 days. Our IT park in Peelamedu now disposes of all electronic waste compliantly. Stackly is the best waste management portal!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar av1">A</div>
+              <div>
+                <strong>Arun Kumar</strong>
+                <span>IT Park Facility Manager</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card featured-testimonial">
+            <div class="stars">★★★★★</div>
+            <p>"As an operations head, Stackly helped us onboard 3 different waste vendors for our factory in one week. The quality of certified providers is outstanding. Highly recommended!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar av2">P</div>
+              <div>
+                <strong>Priya Lakshmi</strong>
+                <span>Operations Head, Roots Industries</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"After struggling with biomedical waste compliance, we connected through Stackly and got a CPCB-certified vendor in SIPCOT within 3 days. Our hospital is now 100% compliant!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar av3">K</div>
+              <div>
+                <strong>Karthik Rajan</strong>
+                <span>Administrator, KG Hospital Coimbatore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY STACKLY -->
+    <section class="why-stackly" style="padding:90px 0;">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Why Stackly</div>
+          <h2>Why <span class="accent">Stackly</span> Stands Out</h2>
+          <p>What makes us the preferred waste management portal across India</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;">
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+            <div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-soft);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;color:var(--primary-light);"><i class="fa-solid fa-location-dot"></i></div>
+            <h4 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Hyper-Local Coverage</h4>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Every service provider is from your city or nearby — no distant irrelevant vendors.</p>
+          </div>
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+            <div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-soft);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;color:var(--primary-light);"><i class="fa-solid fa-shield-check"></i></div>
+            <h4 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Certified Providers</h4>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Every company is verified and licensed before listing. Zero unregistered operators.</p>
+          </div>
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+            <div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-soft);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;color:var(--primary-light);"><i class="fa-solid fa-bolt"></i></div>
+            <h4 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">One-Click Request</h4>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Request any waste management service instantly using your saved profile.</p>
+          </div>
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+            <div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-soft);border:1px solid rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;color:var(--primary-light);"><i class="fa-solid fa-headset"></i></div>
+            <h4 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Dedicated Support</h4>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Our compliance team is here to help you every step of the way — chat or email.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-text">
+            <h2>Ready to Go <span class="accent">Green & Compliant?</span></h2>
+            <p>Join over 50,000 businesses and households who manage their waste responsibly through Stackly.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="register.html" class="btn-primary-lg">Get Started Free</a>
+            <a href="post-job.html" class="btn-outline-lg white">List Your Service</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="index.html" class="footer-logo-link">
+              <img src="assets/images/logo.webp" alt="Stackly" class="footer-logo-img" />
+            </a>
+            <p>India's growing Waste Management Portal. Connecting clients with certified waste solutions nationwide.</p>
+            <div class="social-links">
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h5>For Service Seekers</h5>
+              <ul>
+                <li><a href="jobs.html">Browse Services</a></li>
+                <li><a href="register.html">Create Account</a></li>
+                <li><a href="#">Compliance Resources</a></li>
+                <li><a href="#">Waste Audit Guide</a></li>
+                <li><a href="#">Segregation Tips</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>For Providers</h5>
+              <ul>
+                <li><a href="post-job.html">List a Service</a></li>
+                <li><a href="#">Find Clients</a></li>
+                <li><a href="#">Pricing Plans</a></li>
+                <li><a href="#">Provider Branding</a></li>
+                <li><a href="#">Partnership Solutions</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Top Cities</h5>
+              <ul>
+                <li><a href="jobs.html">Services in Coimbatore</a></li>
+                <li><a href="jobs.html">Services in Tirupur</a></li>
+                <li><a href="jobs.html">Services in Erode</a></li>
+                <li><a href="jobs.html">Services in Salem</a></li>
+                <li><a href="jobs.html">Services in Pollachi</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Stackly. All rights reserved. | India's Trusted Waste Management Portal</p>
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /main-site -->
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
