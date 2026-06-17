@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome | Stackly</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: var(--dark, #0f172a); }
+
+    /* Top bar — sits above the scrollable content, never overlaps card */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      z-index: 100;
+      background: rgba(15,23,42,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .top-bar-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .top-bar-logo img {
+      height: 26px;
+      width: auto;
+      filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
+    }
+    .menu-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .menu-btn:hover { background: rgba(255,255,255,0.12); }
+
+    /* Full-screen menu overlay */
+    .menu-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999;
+      background: var(--dark, #0f172a);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+      visibility: hidden;
+      overflow-y: auto;
+    }
+    .menu-overlay.open {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+      visibility: visible;
+    }
+    .menu-overlay-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .menu-overlay-header img {
+      height: 30px;
+      width: auto;
+      filter: drop-shadow(0 0 7px rgba(34,197,94,0.5));
+    }
+    .menu-close-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #4ade80;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .menu-close-btn:hover { background: rgba(34,197,94,0.15); }
+
+    .menu-overlay-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 20px;
+      gap: 6px;
+      flex: 1;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: 1px solid transparent;
+      width: 100%;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .menu-item i {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #4ade80;
+      flex-shrink: 0;
+    }
+    .menu-item:hover { color: #fff; background: rgba(34,197,94,0.06); border-color: rgba(255,255,255,0.08); }
+    .menu-item.logout-item { color: #f87171; }
+    .menu-item.logout-item i { color: #f87171; background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.25); }
+    .menu-item.logout-item:hover { background: rgba(239,68,68,0.08); }
+    .menu-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 12px 4px; }
+
+    /* Page wrapper — pushed down by topbar height */
+    .welcome-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 84px 20px 40px; /* top padding = topbar + breathing room */
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background shapes */
+    .bg-shape { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .bg-shape-1 { width: 600px; height: 600px; background: #22c55e; opacity: 0.08; top: -200px; right: -150px; }
+    .bg-shape-2 { width: 400px; height: 400px; background: #16a34a; opacity: 0.07; bottom: -100px; left: -100px; }
+    .bg-shape-3 { width: 300px; height: 300px; background: #3b82f6; opacity: 0.06; top: 40%; left: 40%; }
+
+    /* Card */
+    .welcome-card {
+      background: var(--card-bg, #1e293b);
+      border: 1px solid var(--border, rgba(255,255,255,0.08));
+      border-radius: 24px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      text-align: center;
+      animation: cardIn 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(28px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Logo */
+    .welcome-logo { margin-bottom: 24px; }
+    .welcome-logo img {
+      height: 38px; width: auto;
+      filter: drop-shadow(0 0 8px rgba(34,197,94,0.5));
+    }
+
+    /* Avatar — contained fully inside card */
+    .welcome-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 32px rgba(34,197,94,0.45);
+      font-size: 32px;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: avatarPop 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      flex-shrink: 0;
+    }
+    @keyframes avatarPop {
+      from { opacity: 0; transform: scale(0.4); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* Badge */
+    .welcome-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #7dd3fc;
+      margin-bottom: 16px;
+      animation: fadeUp 0.4s 0.35s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Title — responsive font size so long names don't overflow */
+    .welcome-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 6vw, 32px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      word-break: break-word;
+      animation: fadeUp 0.4s 0.45s ease both;
+    }
+    .name-highlight {
+      background: linear-gradient(90deg, #4ade80, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .welcome-sub {
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      animation: fadeUp 0.4s 0.5s ease both;
+    }
+
+    /* Quick action grid */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.4s 0.6s ease both;
+    }
+    .action-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-card:hover {
+      background: rgba(34,197,94,0.08);
+      border-color: rgba(34,197,94,0.3);
+      transform: translateY(-2px);
+    }
+    .action-card i {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      color: #7dd3fc;
+      flex-shrink: 0;
+    }
+    .action-card span { font-size: 13px; font-weight: 600; }
+
+    /* CTA buttons */
+    .btn-explore {
+      display: block; width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border: none; border-radius: 12px;
+      color: #fff; font-size: 15px; font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(34,197,94,0.35);
+      transition: all 0.2s;
+      animation: fadeUp 0.4s 0.7s ease both;
+      margin-bottom: 10px;
+    }
+    .btn-explore:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-post-job {
+      display: block; width: 100%;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.2s;
+      animation: fadeUp 0.4s 0.75s ease both;
+    }
+    .btn-post-job:hover { background: rgba(255,255,255,0.09); color: #fff; }
+
+    .card-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 20px 0; }
+
+    /* Waste category showcase strip */
+    .waste-showcase {
+      margin-bottom: 24px;
+      animation: fadeUp 0.4s 0.55s ease both;
+    }
+    .waste-showcase-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .waste-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .waste-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 4px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .waste-tile-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+    }
+    .waste-tile span {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Confetti */
+    .confetti-dot {
+      position: absolute; border-radius: 50%;
+      animation: floatDot ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes floatDot {
+      0%,100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-18px); opacity: 0.9; }
+    }
+
+    @media (max-width: 400px) {
+      .welcome-card { padding: 32px 20px; }
+      .top-btn { padding: 7px 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed top bar -->
+  <div class="top-bar">
+    <a href="index.html" class="top-bar-logo">
+      <img src="assets/images/logo.webp" alt="Stackly" />
+    </a>
+    <button class="menu-btn" onclick="toggleMenu()" id="menuBtn">
+      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    </button>
+  </div>
+
+  <!-- Full-screen menu overlay -->
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay-header">
+      <a href="index.html"><img src="assets/images/logo.webp" alt="Stackly" /></a>
+      <button class="menu-close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="menu-overlay-list">
+      <li><a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="jobs.html" class="menu-item"><i class="fa-solid fa-magnifying-glass"></i> Find Services</a></li>
+      <li><a href="companies.html" class="menu-item"><i class="fa-solid fa-building"></i> Companies</a></li>
+      <li><a href="categories.html" class="menu-item"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+      <li><a href="post-job.html" class="menu-item"><i class="fa-solid fa-plus"></i> List Your Service</a></li>
+      <li><div class="menu-divider"></div></li>
+      <li><button class="menu-item logout-item" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></li>
+    </ul>
+  </div>
+
+  <div class="welcome-page" id="welcomePage">
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="welcome-card">
+
+      <div class="welcome-logo">
+        <a href="index.html">
+          <img src="assets/images/logo.webp" alt="Stackly" />
+        </a>
+      </div>
+
+      <div class="welcome-avatar" id="userAvatar">M</div>
+
+      <div class="welcome-badge">
+        <i class="fa-solid fa-circle-check"></i> Sign in successful
+      </div>
+
+      <h1 class="welcome-title">
+        Welcome, <span class="name-highlight" id="userName">Maruthu</span>! 👋
+      </h1>
+      <p class="welcome-sub">
+        Great to have you back on Stackly. Your next opportunity is just a search away.
+      </p>
+
+      <div class="waste-showcase">
+        <div class="waste-showcase-label">Browse by waste type</div>
+        <div class="waste-showcase-grid">
+          <a href="categories.html" class="waste-tile">
+            <div class="waste-tile-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a);"><i class="fa-solid fa-mobile-screen"></i></div>
+            <span>E-Waste</span>
+          </a>
+          <a href="categories.html" class="waste-tile">
+            <div class="waste-tile-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"><i class="fa-solid fa-syringe"></i></div>
+            <span>Biomedical</span>
+          </a>
+          <a href="categories.html" class="waste-tile">
+            <div class="waste-tile-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fa-solid fa-industry"></i></div>
+            <span>Industrial</span>
+          </a>
+          <a href="categories.html" class="waste-tile">
+            <div class="waste-tile-icon" style="background:linear-gradient(135deg,#84cc16,#65a30d);"><i class="fa-solid fa-seedling"></i></div>
+            <span>Organic</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <a href="jobs.html" class="action-card">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Find Services</span>
+        </a>
+        <a href="companies.html" class="action-card">
+          <i class="fa-solid fa-building"></i>
+          <span>Companies</span>
+        </a>
+        <a href="categories.html" class="action-card">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Categories</span>
+        </a>
+        <a href="post-job.html" class="action-card">
+          <i class="fa-solid fa-plus"></i>
+          <span>List Your Service</span>
+        </a>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <a href="jobs.html" class="btn-explore">
+        <i class="fa-solid fa-rocket"></i> &nbsp;Explore Services Now
+      </a>
+      <a href="post-job.html" class="btn-post-job">
+        <i class="fa-solid fa-briefcase"></i> &nbsp;List Your Service for Your Company
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      let raw = params.get('name') || localStorage.getItem('stackly_user_name') || 'Friend';
+
+      // Smart name extraction:
+      // 1. Split on dots, underscores, hyphens, digits — take the first meaningful chunk
+      // 2. Cap at 14 characters so it never overflows
+      let name = raw
+        .split(/[._\-0-9]+/)[0]   // take part before any separator/number
+        .replace(/[^a-zA-Z]/g, '') // strip anything non-alpha
+        .trim();
+
+      if (!name || name.length < 2) name = raw.replace(/[^a-zA-Z]/g, '').slice(0, 12) || 'Friend';
+
+      // Capitalise
+      name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+
+      document.getElementById('userName').textContent = name;
+      document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+      document.title = 'Welcome, ' + name + ' | Stackly';
+      localStorage.setItem('stackly_user_name', name);
+    })();
+
+    function handleLogout() {
+      localStorage.removeItem('stackly_user_name');
+      window.location.href = 'index.html';
+    }
+
+    function toggleMenu() {
+      const overlay = document.getElementById('menuOverlay');
+      const isOpen = overlay.classList.toggle('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    // Floating dots
+    (function() {
+      const colors = ['#22c55e','#16a34a','#3b82f6','#8b5cf6','#10b981'];
+      const page = document.getElementById('welcomePage');
+      for (let i = 0; i < 10; i++) {
+        const d = document.createElement('div');
+        d.className = 'confetti-dot';
+        const s = Math.random() * 7 + 3;
+        d.style.cssText = `width:${s}px;height:${s}px;background:${colors[i%colors.length]};left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${3+Math.random()*3}s;opacity:0.35;`;
+        page.appendChild(d);
+      }
+    })();
+  </script>
+</body>
+</html>

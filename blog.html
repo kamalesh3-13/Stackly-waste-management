@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly Blog | Waste Management Tips & Insights</title>
+  <meta name="description" content="Expert waste management advice, compliance guides, recycling tips, and industry insights from Stackly — India's trusted local waste management portal." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .page-wrapper { padding-top: 80px; min-height: 100vh; }
+    .page-hero { background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%); padding: 60px 0 40px; border-bottom: 1px solid var(--border); text-align: center; }
+    .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px,5vw,42px); font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .page-hero p { color: var(--text-muted); font-size: 16px; max-width: 560px; margin: 0 auto; }
+
+    .section-pad { padding: 80px 0; }
+    .alt-bg { background: rgba(255,255,255,0.01); }
+
+    .featured-article { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 36px; margin-bottom: 60px; }
+    @media(max-width:768px){ .featured-article { grid-template-columns: 1fr; padding: 24px; } }
+    .fa-image { background: var(--gradient-soft); border: 1px solid var(--border); border-radius: 16px; padding: 50px 30px; text-align: center; }
+    .fa-image i { font-size: 56px; color: var(--primary); }
+    .fa-content .fa-tag { display: inline-block; padding: 4px 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); border-radius: 99px; font-size: 12px; color: var(--primary); font-weight: 600; margin-bottom: 12px; }
+    .fa-content h3 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .fa-content p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .fa-meta { display: flex; gap: 16px; font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .fa-meta i { color: var(--primary); margin-right: 4px; }
+
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .blog-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s; }
+    .blog-card:hover { border-color: rgba(34,197,94,0.4); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .blog-thumb { padding: 36px 20px; text-align: center; border-bottom: 1px solid var(--border); }
+    .blog-thumb i { font-size: 40px; color: #fff; }
+    .blog-thumb-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+    .blog-body { padding: 24px; }
+    .blog-tag { display: inline-block; padding: 3px 10px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); border-radius: 99px; font-size: 11px; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+    .blog-body h4 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.4; }
+    .blog-body p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .blog-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
+    .blog-meta i { color: var(--primary); margin-right: 4px; }
+
+    .topics-grid { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 48px; }
+    .topic-chip { padding: 8px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 99px; color: var(--text-muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .topic-chip:hover, .topic-chip.active { background: var(--gradient); color: #fff; border-color: transparent; }
+    .topic-chip i { margin-right: 6px; }
+
+    .newsletter-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 48px 40px; text-align: center; max-width: 640px; margin: 0 auto; }
+    .newsletter-box h3 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .newsletter-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; }
+    .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+    @media(max-width:480px){ .newsletter-form { flex-direction: column; } }
+    .newsletter-form input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; outline: none; }
+    .newsletter-form input:focus { border-color: var(--primary); }
+    .newsletter-form input::placeholder { color: var(--text-muted); }
+    .newsletter-form button { padding: 14px 28px; background: var(--gradient); border: none; border-radius: 12px; color: #fff; font-size: 15px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; white-space: nowrap; box-shadow: 0 6px 20px rgba(34,197,94,0.35); transition: all 0.2s; }
+    .newsletter-form button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><img src="assets/images/logo.webp" alt="Stackly" class="nav-logo-img" /></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html">Find Services</a></li>
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Solutions</a></li>
+        <li><a href="blog.html" style="color:var(--primary)">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="signin.html" class="btn-outline">Sign In</a>
+        <a href="post-job.html" class="btn-primary">List Your Service</a>
+      </div>
+      <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow='hidden';">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="index.html" class="mob-logo"><img src="assets/images/logo.webp" alt="Stackly" /></a>
+      <button class="mobile-menu-close" onclick="this.closest('.mobile-menu').classList.remove('open'); document.body.style.overflow='';"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul>
+      <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="jobs.html"><i class="fa-solid fa-magnifying-glass"></i> Find Services</a></li>
+      <li><a href="companies.html"><i class="fa-solid fa-building"></i> Companies</a></li>
+      <li><a href="categories.html"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+      <li><a href="about.html"><i class="fa-solid fa-info-circle"></i> About</a></li>
+      <li><a href="services.html"><i class="fa-solid fa-recycle"></i> Solutions</a></li>
+      <li><a href="blog.html"><i class="fa-solid fa-newspaper"></i> Blog</a></li>
+      <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+      <li><a href="index.html#how-it-works"><i class="fa-solid fa-circle-info"></i> How It Works</a></li>
+      <li><a href="index.html#testimonials"><i class="fa-solid fa-star"></i> Reviews</a></li>
+    </ul>
+    <div class="mobile-menu-footer">
+      <a href="signin.html" class="mob-signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+      <a href="register.html" class="mob-signup"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      <a href="post-job.html" class="mob-post"><i class="fa-solid fa-plus"></i> List Your Service</a>
+      <button class="mob-logout" onclick="localStorage.removeItem('stackly_user_name'); window.location.href='index.html';"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- SECTION 1: HERO -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>Stackly <span class="accent">Blog</span></h1>
+        <p>Waste management guides, compliance tips, recycling best practices, and green business insights — curated for Indian businesses and providers.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2: TOPICS -->
+    <div class="section-pad" style="padding-bottom:0;">
+      <div class="container">
+        <div class="topics-grid">
+          <a href="#" class="topic-chip active"><i class="fa-solid fa-fire"></i> All</a>
+          <a href="#" class="topic-chip"><i class="fa-solid fa-file-lines"></i> Segregation Tips</a>
+          <a href="#" class="topic-chip"><i class="fa-solid fa-circle-check"></i> Compliance Guides</a>
+          <a href="#" class="topic-chip"><i class="fa-solid fa-chart-line"></i> Industry Trends</a>
+          <a href="#" class="topic-chip"><i class="fa-solid fa-building"></i> Provider Insights</a>
+          <a href="#" class="topic-chip"><i class="fa-solid fa-graduation-cap"></i> Beginner's Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: FEATURED ARTICLE -->
+    <div class="section-pad" style="padding-top:40px;">
+      <div class="container">
+        <div class="featured-article">
+          <div class="fa-image" style="background:rgba(34,197,94,0.06);">
+            <div class="blog-thumb-icon" style="width:90px;height:90px;border-radius:20px;margin:0 auto;background:linear-gradient(135deg,#22c55e,#16a34a);">
+              <i class="fa-solid fa-recycle" style="font-size:40px;"></i>
+            </div>
+          </div>
+          <div class="fa-content">
+            <div class="fa-tag">Featured Article</div>
+            <h3>How to Achieve Zero Waste in 2026 — Guide for Indian Businesses</h3>
+            <p>Zero waste is more than a goal — it's a competitive advantage. Learn how to implement waste reduction strategies that cut costs and meet compliance requirements at your facility.</p>
+            <div class="fa-meta">
+              <span><i class="fa-regular fa-calendar"></i> June 8, 2026</span>
+              <span><i class="fa-regular fa-clock"></i> 8 min read</span>
+            </div>
+            <a href="#" class="btn-primary" style="display:inline-flex;padding:10px 22px;font-size:14px;">Read Article <i class="fa-solid fa-arrow-right" style="margin-left:6px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: ARTICLES GRID -->
+    <div class="section-pad alt-bg">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Latest Posts</div>
+          <h2>Latest from the <span class="accent">Blog</span></h2>
+          <p>Stay updated with the latest waste management trends and regulatory updates</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(59,130,246,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"><i class="fa-solid fa-syringe"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Compliance Guides</div>
+              <h4>Biomedical Waste Compliance in India — A Complete CPCB Guide</h4>
+              <p>Master biomedical waste compliance with our comprehensive guide to CPCB rules and best practices for hospitals and clinics.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> June 5, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(245,158,11,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fa-solid fa-chart-bar"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Industry Trends</div>
+              <h4>Coimbatore Waste Management Costs — 2026 Pricing Guide</h4>
+              <p>Discover the most cost-effective e-waste recycling options across Coimbatore, Tirupur, and Erode for businesses of all sizes.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> June 1, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(168,85,247,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#a855f7,#7e22ce);"><i class="fa-solid fa-graduation-cap"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Beginner's Guide</div>
+              <h4>Meeting Tamil Nadu Pollution Control Board Requirements — A Complete Guide</h4>
+              <p>New to waste compliance? Here's your step-by-step roadmap to meeting Tamil Nadu Pollution Control Board requirements for your industry.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> May 28, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 7 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(34,197,94,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#22c55e,#16a34a);"><i class="fa-solid fa-building"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Provider Insights</div>
+              <h4>Why Local Waste Management Portals Are Beating National Platforms in Tier-2 Cities</h4>
+              <p>Businesses are shifting to verified local waste vendors. Here's why Stackly delivers better results for companies managing waste in Coimbatore and beyond.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> May 22, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(6,182,212,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490);"><i class="fa-solid fa-clipboard-check"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Segregation Tips</div>
+              <h4>The Complete Waste Audit Checklist — Pass Your Next Inspection</h4>
+              <p>Most Indian industries now face stricter waste audit requirements. Learn how to document your waste trail so you pass inspections first time.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> May 18, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-thumb" style="background:rgba(132,204,22,0.06);"><div class="blog-thumb-icon" style="background:linear-gradient(135deg,#84cc16,#65a30d);"><i class="fa-solid fa-seedling"></i></div></div>
+            <div class="blog-body">
+              <div class="blog-tag">Industry Trends</div>
+              <h4>Turning Organic Waste Into Revenue — A Composting Guide for Businesses</h4>
+              <p>Thinking of adding composting to your waste strategy? Learn how to turn organic waste into a revenue stream for your business.</p>
+              <div class="blog-meta">
+                <span><i class="fa-regular fa-calendar"></i> May 14, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div style="text-align:center;margin-top:44px;">
+          <a href="#" class="btn-outline-lg">Load More Articles <i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: NEWSLETTER -->
+    <div class="section-pad">
+      <div class="container">
+        <div class="newsletter-box">
+          <h3>Get Waste Management Insights <span class="accent">Delivered Weekly</span></h3>
+          <p>Join 5,000+ subscribers and receive curated compliance advice, industry insights, and exclusive service updates.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email address" />
+            <button onclick="handleSubscribe()">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:16px;">No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const name = localStorage.getItem('stackly_user_name');
+      const signin = document.querySelector('.nav-actions a[href="signin.html"]');
+      const mobSignin = document.querySelector('.mob-signin');
+      const mobSignup = document.querySelector('.mob-signup');
+      const mobLogout = document.querySelector('.mob-logout');
+      if (name) {
+        if (signin) { signin.textContent = 'Hi, ' + name; signin.href = 'welcome.html'; }
+        if (mobSignin) mobSignin.style.display = 'none';
+        if (mobSignup) mobSignup.style.display = 'none';
+      } else if (mobLogout) { mobLogout.style.display = 'none'; }
+    })();
+    window.addEventListener('scroll', function() {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+    function handleSubscribe() {
+      const input = document.querySelector('.newsletter-form input');
+      if (!input.value.trim()) { alert('Please enter your email address.'); return; }
+      alert('Thank you for subscribing! Check your inbox for a confirmation email.');
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
